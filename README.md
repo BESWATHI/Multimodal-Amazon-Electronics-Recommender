@@ -125,24 +125,4 @@ The **Amazon Electronics Recommender Bot** is a next-generation AI-powered chatb
 
 
 
-## Contributing 🤝
-
-We welcome contributions! Follow the steps below:
-
-1. **Fork the repository.**
-2. **Create a new branch** for your feature or bug fix.
-3. **Commit your changes** and submit a pull request.
-
----
-
-## License 📜
-
-This project is licensed under the MIT License.
-
----
-
-## Contact 📧
-
-**Anjali Kabra**\
-GitHub: [Anjali Kabra](https://github.com/anjalikabra)
 
