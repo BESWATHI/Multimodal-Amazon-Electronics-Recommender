@@ -4,10 +4,11 @@ from ecommbot.ingest import ingestdata
 from ecommbot.retrieval import generation
 import os
 
-# Initialize Flask app
+# Initialize Flask app (This sets up the Flask app and tells it where your HTML and static files (like audio) are located.)
 app = Flask(__name__, template_folder='templates', static_folder='static')
 
-# Load vector store and generate response chain
+# Load vector store and generate response chain (This is the important part: ingestdata() loads your stored embeddings from AstraDB , generation() builds the pipeline that uses:
+#the GPT model to generate recommendations
 try:
     vstore = ingestdata("done")
     response_chain = generation(vstore)
@@ -21,7 +22,7 @@ except Exception as e:
 def index():
     return render_template("chat.html")
 
-# Route to handle user queries
+# Route to handle user queries (it checks whether the user typed text or recorded audio.)
 @app.route("/ask", methods=["POST"])
 def ask():
     try:
