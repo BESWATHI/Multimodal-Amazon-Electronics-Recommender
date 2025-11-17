@@ -1,3 +1,13 @@
+'''BLIP → for image captioning
+
+Whisper → for speech-to-text
+
+gTTS → for text-to-speech
+
+PIL → for image handling
+
+nltk → for basic text cleanup'''
+
 from transformers import BlipProcessor, BlipForConditionalGeneration
 import whisper
 from gtts import gTTS
@@ -10,7 +20,7 @@ nltk.download('punkt')
 # Load Whisper model for audio transcription
 DEVICE = "cpu"
 try:
-    whisper_model = whisper.load_model("base", device=DEVICE)
+    whisper_model = whisper.load_model("base", device=DEVICE) #“This loads the model that listens to the user’s voice and turns it into text.”
     print("Whisper model loaded successfully.")
 except Exception as e:
     whisper_model = None
@@ -18,7 +28,7 @@ except Exception as e:
 
 # Load BLIP for image-to-text
 try:
-    blip_processor = BlipProcessor.from_pretrained("Salesforce/blip-image-captioning-base")
+    blip_processor = BlipProcessor.from_pretrained("Salesforce/blip-image-captioning-base") #This loads the model that looks at an image and describes what it sees.”
     blip_model = BlipForConditionalGeneration.from_pretrained("Salesforce/blip-image-captioning-base")
     print("BLIP model loaded successfully.")
 except Exception as e:
@@ -26,7 +36,7 @@ except Exception as e:
     blip_model = None
     print(f"Error loading BLIP model: {e}")
 
-def img2txt(input_image):
+def img2txt(input_image): $#This function takes an image, runs it through BLIP, and generates a caption. This helps the system understand image inputs.”
     if not blip_model or not blip_processor:
         return "Image-to-text model is not available. Please ensure BLIP is loaded correctly."
     try:
@@ -38,7 +48,7 @@ def img2txt(input_image):
     except Exception as e:
         return f"Error processing image: {e}"
 
-def transcribe(audio_file):
+def transcribe(audio_file): #This function takes a voice recording, runs it through Whisper, and returns the text version of what the user said.
     try:
         temp_audio_path = "temp_audio.wav"
         if hasattr(audio_file, "save"):
@@ -60,7 +70,7 @@ def transcribe(audio_file):
         print(f"Error transcribing audio: {e}")
         return "Sorry, I could not understand your audio input."
 
-def text_to_speech(text, filename):
+def text_to_speech(text, filename): #This function converts the chatbot’s text response back into audio using gTTS, so the user can listen to the answer.
     try:
         audio_dir = os.path.join(os.getcwd(), "static", "audio")
         file_path = os.path.join(audio_dir, filename)
